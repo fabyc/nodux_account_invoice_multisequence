@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!-- This file is part of the account_invoice_multisequence module for Tryton.
+The COPYRIGHT file at the top level of this repository contains the full
+copyright notices and license terms. -->
+<tryton>
+    <data>
+        <record model="ir.model.access" id="access_journal_invoice_sequence">
+            <field name="model" search="[('model', '=', 'account.journal.invoice.sequence')]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <record model="ir.model.access" id="access_jounral_invoice_sequence_admin">
+            <field name="model" search="[('model', '=', 'account.journal.invoice.sequence')]"/>
+            <field name="group" ref="account.group_account_admin"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_delete" eval="True"/>
+        </record>
+
+        <!-- account.journal.invoice.sequence -->
+        <record model="ir.ui.view" id="account_journal_invoice_sequence_view_form">
+            <field name="model">account.journal.invoice.sequence</field>
+            <field name="type">form</field>
+            <field name="name">account_journal_invoice_sequence_form</field>
+        </record>
+        <record model="ir.ui.view" id="account_journal_invoice_sequence_view_list">
+            <field name="model">account.journal.invoice.sequence</field>
+            <field name="type">tree</field>
+            <field name="name">account_journal_invoice_sequence_list</field>
+        </record>
+
+        <!-- account.fiscalyear -->
+        <record model="ir.ui.view" id="fiscalyear_view_form">
+            <field name="model">account.fiscalyear</field>
+            <field name="inherit" ref="account.fiscalyear_view_form"/>
+            <field name="name">fiscalyear_form</field>
+        </record>
+        <!-- account.journal -->
+        <record model="ir.ui.view" id="journal_view_form">
+            <field name="model">account.journal</field>
+            <field name="inherit" ref="account.journal_view_form"/>
+            <field name="name">journal_form</field>
+        </record>
+        <!-- user-->
+        <record model="ir.ui.view" id="user_invoice_sequence_view_form">
+            <field name="model">res.user</field>
+            <field name="type">form</field>
+            <field name="name">user_invoice_sequence_form</field>
+        </record>
+        <record model="ir.ui.view" id="user_invoice_sequence_view_list">
+            <field name="model">res.user</field>
+            <field name="type">tree</field>
+            <field name="name">user_invoice_sequence_list</field>
+        </record>
+    </data>
+</tryton>
