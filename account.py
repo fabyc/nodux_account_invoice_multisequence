@@ -113,6 +113,18 @@ class AccountJournalInvoiceSequence(ModelSQL, ModelView):
         if self.journal:
             return self.journal.type
 
+    """
+    @staticmethod
+    def default_journal():
+        pool = Pool()
+        Journal = pool.get('account.journal')
+        journal = Journal.search([('type' ,'=', 'expense')])
+        print "Libro" ,journal
+        for j in journal:
+            journal_d = j
+        return journal_d
+    """
+        
 class Journal:
     __name__ = 'account.journal'
     sequences = fields.One2Many('account.journal.invoice.sequence', 'journal',
@@ -138,7 +150,7 @@ class Journal:
 class FiscalYear:
     __name__ = 'account.fiscalyear'
     journal_sequences = fields.One2Many('account.journal.invoice.sequence',
-        'fiscalyear', 'Journal Sequences')
+        'fiscalyear', 'Secuencia de comprobantes por punto de venta')
 
 class Invoice:
     __name__ = 'account.invoice'
@@ -151,15 +163,36 @@ class Invoice:
         Date = pool.get('ir.date')
         User = pool.get('res.user')
         user = User.search([('id', '=', self.create_uid.id)])
+        Period = pool.get('account.period')
+        test_state = True
+        if self.type in ('in_invoice', 'in_credit_note'):
+            test_state = False
+            
         for u in user:
             punto_emision = u.sale_device
+            
         Sequence = pool.get('ir.sequence.strict')
         Sequences = pool.get('account.journal.invoice.sequence')
         sequence1 = Sequences.search([('users','=', punto_emision)])
+        type_c = self.type
         
         if sequence1:
             for s in sequence1:
-                sequence = s.out_invoice_sequence
+                print "Cada", s
+                if type_c == 'out_invoice':
+                    sequence = s.out_invoice_sequence
+                if type_c == 'in_invoice':
+                    sequence = s.in_invoice_sequence
+                if type_c == 'in_credit_note':
+                    sequence = s.in_credit_note_sequence
+                if type_c == 'out_credit_note':
+                    sequence = s.out_credit_note_sequence
+        else:
+            accounting_date = self.accounting_date or self.invoice_date
+            period_id = Period.find(self.company.id,
+                date=accounting_date, test_state=test_state)
+            period = Period(period_id)
+            sequence = period.get_invoice_sequence(self.type)
         
         if sequence:
             with Transaction().set_context(
