@@ -1,14 +1,15 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 msgctxt "error:account.journal.invoice.sequence:"
 msgid "Period can be used only once per Journal Sequence."
-msgstr "El período sólo se puede usar una vez en las secuencias de diario."
+msgstr ""
+"El período sólo se puede usar una vez en las secuencias de libro diario."
 
 msgctxt "field:account.fiscalyear,journal_sequences:"
-msgid "Journal Sequences"
-msgstr "Secuencias de diario"
+msgid "Secuencia de comprobantes por punto de venta"
+msgstr "Secuencia de comprobantes por punto de venta"
 
 msgctxt "field:account.journal,sequences:"
 msgid "Sequences"
@@ -20,15 +21,15 @@ msgstr "Empresa"
 
 msgctxt "field:account.journal.invoice.sequence,create_date:"
 msgid "Create Date"
-msgstr "Fecha creación"
+msgstr "Fecha de creación"
 
 msgctxt "field:account.journal.invoice.sequence,create_uid:"
 msgid "Create User"
-msgstr "Usuario creación"
+msgstr "Creado por usuario"
 
 msgctxt "field:account.journal.invoice.sequence,fiscalyear:"
 msgid "Fiscalyear"
-msgstr "Ejercicio fiscal"
+msgstr "Año fiscal"
 
 msgctxt "field:account.journal.invoice.sequence,id:"
 msgid "ID"
@@ -36,7 +37,7 @@ msgstr "ID"
 
 msgctxt "field:account.journal.invoice.sequence,in_credit_note_sequence:"
 msgid "Supplier Credit Note Sequence"
-msgstr "Secuencia de factura de abono de proveedor"
+msgstr "Secuencia de nota de crédito de proveedor"
 
 msgctxt "field:account.journal.invoice.sequence,in_invoice_sequence:"
 msgid "Supplier Invoice Sequence"
@@ -44,11 +45,11 @@ msgstr "Secuencia de factura de proveedor"
 
 msgctxt "field:account.journal.invoice.sequence,journal:"
 msgid "Journal"
-msgstr "Diario"
+msgstr "Libro diario"
 
 msgctxt "field:account.journal.invoice.sequence,out_credit_note_sequence:"
 msgid "Customer Credit Note Sequence"
-msgstr "Secuencia de factura de abono de cliente"
+msgstr "Secuencia de nota de crédito de cliente"
 
 msgctxt "field:account.journal.invoice.sequence,out_invoice_sequence:"
 msgid "Customer Invoice Sequence"
@@ -66,13 +67,17 @@ msgctxt "field:account.journal.invoice.sequence,type:"
 msgid "Type"
 msgstr "Tipo"
 
+msgctxt "field:account.journal.invoice.sequence,users:"
+msgid "Puntos de Venta"
+msgstr "Puntos de venta"
+
 msgctxt "field:account.journal.invoice.sequence,write_date:"
 msgid "Write Date"
-msgstr "Fecha modificación"
+msgstr "Fecha de modificación"
 
 msgctxt "field:account.journal.invoice.sequence,write_uid:"
 msgid "Write User"
-msgstr "Usuario modificación"
+msgstr "Modificado por usuario"
 
 msgctxt "model:account.journal.invoice.sequence,name:"
 msgid "Account Journal Invoice Sequence"
@@ -85,3 +90,23 @@ msgstr "Secuencia de factura"
 msgctxt "view:account.journal:"
 msgid "Sequences"
 msgstr "Secuencias"
+
+msgctxt "view:res.user:"
+msgid "Access Permissions"
+msgstr "Permisos de acceso"
+
+msgctxt "view:res.user:"
+msgid "Account Invoice Sequence"
+msgstr "Secuencia de factura"
+
+msgctxt "view:res.user:"
+msgid "Actions"
+msgstr "Acciones"
+
+msgctxt "view:res.user:"
+msgid "Preferences"
+msgstr "Preferencias"
+
+msgctxt "view:res.user:"
+msgid "User"
+msgstr "Usuario"

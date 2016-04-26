@@ -165,12 +165,18 @@ class Invoice:
         user = User.search([('id', '=', self.create_uid.id)])
         Period = pool.get('account.period')
         test_state = True
+        
+        shop = Transaction().context.get('shop')
+        
         if self.type in ('in_invoice', 'in_credit_note'):
             test_state = False
-            
-        for u in user:
-            punto_emision = u.sale_device
-            
+             
+        if user:
+            for u in user:
+                punto_emision = u.sale_device
+        else:
+            punto_emision = shop 
+               
         Sequence = pool.get('ir.sequence.strict')
         Sequences = pool.get('account.journal.invoice.sequence')
         sequence1 = Sequences.search([('users','=', punto_emision)])
@@ -178,7 +184,6 @@ class Invoice:
         
         if sequence1:
             for s in sequence1:
-                print "Cada", s
                 if type_c == 'out_invoice':
                     sequence = s.out_invoice_sequence
                 if type_c == 'in_invoice':
