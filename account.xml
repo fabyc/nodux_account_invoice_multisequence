@@ -44,7 +44,7 @@ copyright notices and license terms. -->
             <field name="inherit" ref="account.journal_view_form"/>
             <field name="name">journal_form</field>
         </record>
-        <!-- user-->
+        <!-- devices-->
         <record model="ir.ui.view" id="user_invoice_sequence_view_form">
             <field name="model">res.user</field>
             <field name="type">form</field>

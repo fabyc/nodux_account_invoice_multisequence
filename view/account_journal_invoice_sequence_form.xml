@@ -11,8 +11,8 @@ copyright notices and license terms. -->
     <label name="fiscalyear"/>
     <field name="fiscalyear"/>
     <newline/>
-    <label name="users"/>
-    <field name="users"/>
+    <label name="devices"/>
+    <field name="devices"/>
     <label name="period"/>
     <field name="period"/>
     <newline/>
