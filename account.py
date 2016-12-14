@@ -91,11 +91,11 @@ class AccountJournalInvoiceSequence(ModelSQL, ModelView):
                 ]
             ],
         depends=['company', 'type'])
-        
-    
+
+
     users = fields.Many2One('sale.device', 'Puntos de Venta', required=True)
 
-    
+
     @classmethod
     def __setup__(cls):
         super(AccountJournalInvoiceSequence, cls).__setup__()
@@ -124,7 +124,7 @@ class AccountJournalInvoiceSequence(ModelSQL, ModelView):
             journal_d = j
         return journal_d
     """
-        
+
 class Journal:
     __name__ = 'account.journal'
     sequences = fields.One2Many('account.journal.invoice.sequence', 'journal',
@@ -165,23 +165,25 @@ class Invoice:
         user = User.search([('id', '=', self.create_uid.id)])
         Period = pool.get('account.period')
         test_state = True
-        
-        shop = Transaction().context.get('shop')
-        
-        if self.type in ('in_invoice', 'in_credit_note'):
-            test_state = False
-             
-        if user:
-            for u in user:
-                punto_emision = u.sale_device
-        else:
-            punto_emision = shop 
-               
+        Sale = pool.get('sale.sale')
+        sales= Sale.search([('reference','=',self.description), ('reference', '!=',  None)])
+        sequence1 = None
+        sequence = None
         Sequence = pool.get('ir.sequence.strict')
         Sequences = pool.get('account.journal.invoice.sequence')
-        sequence1 = Sequences.search([('users','=', punto_emision)])
-        type_c = self.type
-        
+
+        if self.type == 'in_invoice':
+            pass
+        else:
+            for s in sales:
+                device = s.sale_device
+
+            if self.type in ('in_invoice', 'in_credit_note'):
+                test_state = False
+            punto_emision = device
+            sequence1 = Sequences.search([('users','=', punto_emision)])
+            type_c = self.type
+
         if sequence1:
             for s in sequence1:
                 if type_c == 'out_invoice':
@@ -198,7 +200,7 @@ class Invoice:
                 date=accounting_date, test_state=test_state)
             period = Period(period_id)
             sequence = period.get_invoice_sequence(self.type)
-        
+
         if sequence:
             with Transaction().set_context(
                     date=self.invoice_date or Date.today()):
@@ -207,5 +209,4 @@ class Invoice:
                         and self.type in ('out_invoice', 'out_credit_note')):
                     self.invoice_date = Transaction().context['date']
                 self.save()
-        print self.number
         return super(Invoice, self).set_number()
