@@ -164,6 +164,7 @@ class Invoice:
         User = pool.get('res.user')
         user = User.search([('id', '=', self.create_uid.id)])
         Period = pool.get('account.period')
+        Device = pool.get('sale.device')
         test_state = True
         Sale = pool.get('sale.sale')
         sales= Sale.search([('reference','=',self.description), ('reference', '!=',  None)])
@@ -171,7 +172,11 @@ class Invoice:
         sequence = None
         Sequence = pool.get('ir.sequence.strict')
         Sequences = pool.get('account.journal.invoice.sequence')
-
+        devices = Device.search([('id', '=', 1)])
+        if devices:
+            for d in devices:
+                device = d
+                
         if self.type == 'in_invoice':
             pass
         else:
